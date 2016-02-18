@@ -49,9 +49,8 @@ namespace OptionsWebSite.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string StudentId { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +63,10 @@ namespace OptionsWebSite.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "User")]
+        public string StudentId { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
