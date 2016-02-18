@@ -64,7 +64,7 @@ namespace OptionsWebSite.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "User")]
+        [Display(Name = "Username")]
         public string StudentId { get; set; }
 
         [Required]

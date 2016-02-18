@@ -11,10 +11,12 @@ using OptionsWebSite.DataContext;
 
 namespace OptionsWebSite.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ChoicesController : Controller
     {
         private DiplomaOptionsContext db = new DiplomaOptionsContext();
-
+        [OverrideAuthorization()]
+        [Authorize(Roles = "Student,Admin")]
         // GET: Choices
         public ActionResult Index()
         {
@@ -36,18 +38,20 @@ namespace OptionsWebSite.Controllers
             }
             return View(choice);
         }
-
+        [OverrideAuthorization()]
+        [Authorize(Roles = "Student,Admin")]
         // GET: Choices/Create
         public ActionResult Create()
         {
-            ViewBag.FirstChoiceOptionId = new SelectList(db.Options, "OptionId", "Title");
+            ViewBag.FirstChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
             ViewBag.YearTermId = new SelectList(db.YearTerms, "YearTermId", "YearTermId");
-            ViewBag.FourthChoiceOptionId = new SelectList(db.Options, "OptionId", "Title");
-            ViewBag.SecondChoiceOptionId = new SelectList(db.Options, "OptionId", "Title");
-            ViewBag.ThirdChoiceOptionId = new SelectList(db.Options, "OptionId", "Title");
+            ViewBag.FourthChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
+            ViewBag.SecondChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
+            ViewBag.ThirdChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
             return View();
         }
-
+        [OverrideAuthorization()]
+        [Authorize(Roles = "Student,Admin")]
         // POST: Choices/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -55,18 +59,26 @@ namespace OptionsWebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ChoiceId,YearTermId,StudentId,StudentFirstName,StudentLastName,FirstChoiceOptionId,SecondChoiceOptionId,ThirdChoiceOptionId,FourthChoiceOptionId,SelectionDate")] Choice choice)
         {
-            if (ModelState.IsValid)
+
+            choice.SelectionDate = DateTime.Now;
+            Boolean canChoose = choosable(choice);
+
+            if (ModelState.IsValid && canChoose)
             {
                 db.Choices.Add(choice);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            else
+            {
+                ModelState.AddModelError("", "The options you chose must all be different");
+            }
 
-            ViewBag.FirstChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.FirstChoiceOptionId);
+            ViewBag.FirstChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.FirstChoiceOptionId);
             ViewBag.YearTermId = new SelectList(db.YearTerms, "YearTermId", "YearTermId", choice.YearTermId);
-            ViewBag.FourthChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.FourthChoiceOptionId);
-            ViewBag.SecondChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.SecondChoiceOptionId);
-            ViewBag.ThirdChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.ThirdChoiceOptionId);
+            ViewBag.FourthChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.FourthChoiceOptionId);
+            ViewBag.SecondChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.SecondChoiceOptionId);
+            ViewBag.ThirdChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.ThirdChoiceOptionId);
             return View(choice);
         }
 
@@ -82,11 +94,11 @@ namespace OptionsWebSite.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.FirstChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.FirstChoiceOptionId);
+            ViewBag.FirstChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.FirstChoiceOptionId);
             ViewBag.YearTermId = new SelectList(db.YearTerms, "YearTermId", "YearTermId", choice.YearTermId);
-            ViewBag.FourthChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.FourthChoiceOptionId);
-            ViewBag.SecondChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.SecondChoiceOptionId);
-            ViewBag.ThirdChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.ThirdChoiceOptionId);
+            ViewBag.FourthChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.FourthChoiceOptionId);
+            ViewBag.SecondChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.SecondChoiceOptionId);
+            ViewBag.ThirdChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.ThirdChoiceOptionId);
             return View(choice);
         }
 
@@ -97,17 +109,22 @@ namespace OptionsWebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ChoiceId,YearTermId,StudentId,StudentFirstName,StudentLastName,FirstChoiceOptionId,SecondChoiceOptionId,ThirdChoiceOptionId,FourthChoiceOptionId,SelectionDate")] Choice choice)
         {
-            if (ModelState.IsValid)
+            Boolean canChoose = choosable(choice);
+            if (ModelState.IsValid && canChoose)
             {
                 db.Entry(choice).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.FirstChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.FirstChoiceOptionId);
+            else
+            {
+                ModelState.AddModelError("", "You cannot choose two of the same option.");
+            }
+            ViewBag.FirstChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.FirstChoiceOptionId);
             ViewBag.YearTermId = new SelectList(db.YearTerms, "YearTermId", "YearTermId", choice.YearTermId);
-            ViewBag.FourthChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.FourthChoiceOptionId);
-            ViewBag.SecondChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.SecondChoiceOptionId);
-            ViewBag.ThirdChoiceOptionId = new SelectList(db.Options, "OptionId", "Title", choice.ThirdChoiceOptionId);
+            ViewBag.FourthChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.FourthChoiceOptionId);
+            ViewBag.SecondChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.SecondChoiceOptionId);
+            ViewBag.ThirdChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.ThirdChoiceOptionId);
             return View(choice);
         }
 
@@ -144,6 +161,30 @@ namespace OptionsWebSite.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private IQueryable<Option> getActiveOptions()
+        {
+            return db.Options.Where(ao => ao.isActive == true);
+        }
+
+        private bool choosable(Choice choice)
+        {
+            HashSet<int> choiceSet = new HashSet<int>();
+
+            choiceSet.Add((int)choice.FirstChoiceOptionId);
+            choiceSet.Add((int)choice.SecondChoiceOptionId);
+            choiceSet.Add((int)choice.ThirdChoiceOptionId);
+            choiceSet.Add((int)choice.FourthChoiceOptionId);
+
+            if( choiceSet.Count == 4)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
