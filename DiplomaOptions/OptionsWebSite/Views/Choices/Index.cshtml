@@ -12,19 +12,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FK_YearTermId.YearTermId)
+            @Html.DisplayNameFor(model => model.FK_YearTermId.Term)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstOption.Title)
+            @Html.DisplayNameFor(model => model.FirstOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FourthOption.Title)
+            @Html.DisplayNameFor(model => model.SecondOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SecondOption.Title)
+            @Html.DisplayNameFor(model => model.ThirdOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ThirdOption.Title)
+            @Html.DisplayNameFor(model => model.FourthOption)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StudentId)
@@ -41,7 +41,18 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.FK_YearTermId.YearTermId)
+            @if (item.FK_YearTermId.YearTermId == 10) {
+                @("Winter")
+            }
+            else if (item.FK_YearTermId.YearTermId == 20){
+                @("Spring/Summer")
+            }
+            else{
+                @("fall")
+            }
+
+
+            @Html.DisplayFor(modelItem => item.FK_YearTermId.Year)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FirstOption.Title)

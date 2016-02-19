@@ -16,9 +16,9 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.YearTermId, "YearTermId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.YearTermId, "Year Term Id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("YearTermId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.EditorFor(model => model.YearTermId, new { htmlAttributes = new { @class = "form-control", @placeholder = ViewBag.yearTerm, @Value = ViewBag.yearTermId,  @readonly = "true" } })
                 @Html.ValidationMessageFor(model => model.YearTermId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,9 +26,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StudentId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StudentId, new { htmlAttributes = new { @class = "form-control" } })
-
-                @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.StudentId, new { htmlAttributes = new { @class = "form-control", @placeholder=ViewBag.studentId, @Value= ViewBag.studentId, @readonly="true" } })
+                @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" } )
             </div>
         </div>
 
@@ -49,7 +48,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FirstChoiceOptionId, "FirstChoiceOptionId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FirstChoiceOptionId, "First Choice", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("FirstChoiceOptionId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FirstChoiceOptionId, "", new { @class = "text-danger" })
@@ -57,7 +56,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SecondChoiceOptionId, "SecondChoiceOptionId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SecondChoiceOptionId, "Second Choice", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("SecondChoiceOptionId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.SecondChoiceOptionId, "", new { @class = "text-danger" })
@@ -65,7 +64,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ThirdChoiceOptionId, "ThirdChoiceOptionId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ThirdChoiceOptionId, "Third Choice", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ThirdChoiceOptionId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ThirdChoiceOptionId, "", new { @class = "text-danger" })
@@ -73,7 +72,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FourthChoiceOptionId, "FourthChoiceOptionId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FourthChoiceOptionId, "Fourth Choice", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("FourthChoiceOptionId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FourthChoiceOptionId, "", new { @class = "text-danger" })

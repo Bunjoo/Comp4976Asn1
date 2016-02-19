@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using DiplomaDataModel;
 using OptionsWebSite.DataContext;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace OptionsWebSite.Controllers
 {
@@ -43,11 +45,32 @@ namespace OptionsWebSite.Controllers
         // GET: Choices/Create
         public ActionResult Create()
         {
+
+            var current = db.YearTerms.Where(c => c.isDefault == true).First();
+            string term = "";
+            if(current.YearTermId == 10) {
+                term += "Winter";
+            }
+            else if (current.YearTermId == 20)
+            {
+                term += "Sping/Summer";
+            }
+            else {
+                term += "Fall";
+            }
+            int yearTermId = current.YearTermId;
+
             ViewBag.FirstChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
-            ViewBag.YearTermId = new SelectList(db.YearTerms, "YearTermId", "YearTermId");
+            ViewBag.YearTermId = yearTermId;
+            ViewBag.yearTerm = term;
             ViewBag.FourthChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
             ViewBag.SecondChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
             ViewBag.ThirdChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
+            
+            
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            ViewBag.studentId = user.UserName;
+            
             return View();
         }
         [OverrideAuthorization()]
