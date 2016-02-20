@@ -11,8 +11,28 @@
     <h4>Choice</h4>
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
-            @Html.DisplayNameFor(model => model.FirstOption.Title)
+            @Html.DisplayNameFor(model => model.FK_YearTermId.Term)
+        </dt>
+
+        <dd>
+            @if (Model.FK_YearTermId.Term == 10)
+            {
+                @("Winter " + Model.FK_YearTermId.Year)
+            }
+            else if (Model.FK_YearTermId.Term == 20)
+            {
+                @("Spring/Summer " + Model.FK_YearTermId.Year)
+            }
+            else {
+                @("fall " + Model.FK_YearTermId.Year)
+            }
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstOption)
         </dt>
 
         <dd>
@@ -20,23 +40,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FK_YearTermId.YearTermId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FK_YearTermId.YearTermId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FourthOption.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FourthOption.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SecondOption.Title)
+            @Html.DisplayNameFor(model => model.SecondOption)
         </dt>
 
         <dd>
@@ -44,11 +48,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ThirdOption.Title)
+            @Html.DisplayNameFor(model => model.ThirdOption)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ThirdOption.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FourthOption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FourthOption.Title)
         </dd>
 
         <dt>

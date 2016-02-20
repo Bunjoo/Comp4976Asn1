@@ -65,6 +65,7 @@ namespace OptionsWebSite.Models
     {
         [Required]
         [Display(Name = "Username")]
+        [RegularExpression("^[Aa][0-9]{8}$" , ErrorMessage = "Username needs to follow the A00000000 convention")]
         public string StudentId { get; set; }
 
         [Required]

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "_MenuPartial";
+}
+
+@{
+    ViewBag.Title = "_MenuPartial";
+}
+
+@if (User.IsInRole("Admin"))
+{
+    <ul class="nav navbar-nav navbar-left">
+        <li>@Html.ActionLink("Choices", "Index", "Choices")</li>
+        <li>@Html.ActionLink("Options", "Index", "Options")</li>
+        <li>@Html.ActionLink("Year Terms", "Index", "YearTerms")</li>
+    </ul>
+}
+else if (User.IsInRole("Student"))
+{
+    <ul class="nav navbar-nav navbar-left">
+        <li>@Html.ActionLink("Pick a Choice", "Create", "Choices")</li>
+    </ul>
+}

@@ -50,6 +50,24 @@ namespace OptionsWebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "YearTermId,Year,Term,isDefault")] YearTerm yearTerm)
         {
+
+            //if isdefault is equal to true, set all others to false
+            if (yearTerm.isDefault == true)
+            {
+                try
+                {
+                    var def = db.YearTerms.Where(c => c.isDefault == true).First();
+                    if (def != null && ModelState.IsValid)
+                    {
+                        def.isDefault = false;
+                        db.Entry(def).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                { }
+            } 
+
             if (ModelState.IsValid)
             {
                 db.YearTerms.Add(yearTerm);
@@ -82,6 +100,25 @@ namespace OptionsWebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "YearTermId,Year,Term,isDefault")] YearTerm yearTerm)
         {
+            //if isdefault is equal to true, set all others to false
+            if (yearTerm.isDefault == true)
+            {
+                try
+                {
+                    var def = db.YearTerms.Where(c => c.isDefault == true).First();
+                    if (def != null && ModelState.IsValid)
+                    {
+                        def.isDefault = false;
+                        db.Entry(def).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(yearTerm).State = EntityState.Modified;

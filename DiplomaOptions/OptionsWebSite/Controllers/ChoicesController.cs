@@ -18,7 +18,7 @@ namespace OptionsWebSite.Controllers
     {
         private DiplomaOptionsContext db = new DiplomaOptionsContext();
         [OverrideAuthorization()]
-        [Authorize(Roles = "Student,Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: Choices
         public ActionResult Index()
         {
@@ -33,7 +33,8 @@ namespace OptionsWebSite.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Choice choice = db.Choices.Find(id);
+            var choices = db.Choices.Include(c => c.FirstOption).Include(c => c.SecondOption).Include(c => c.ThirdOption).Include(c => c.FourthOption).Include(c => c.FK_YearTermId);
+            Choice choice = choices.Where(c => c.ChoiceId == id).First();
             if (choice == null)
             {
                 return HttpNotFound();
@@ -45,23 +46,25 @@ namespace OptionsWebSite.Controllers
         // GET: Choices/Create
         public ActionResult Create()
         {
-
             var current = db.YearTerms.Where(c => c.isDefault == true).First();
+            
+
             string term = "";
-            if(current.YearTermId == 10) {
+            if(current.Term == 10) {
                 term += "Winter";
             }
-            else if (current.YearTermId == 20)
+            else if (current.Term == 20)
             {
-                term += "Sping/Summer";
+                term += "Spring/Summer";
             }
-            else {
+            else{
                 term += "Fall";
             }
             int yearTermId = current.YearTermId;
 
             ViewBag.FirstChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
             ViewBag.YearTermId = yearTermId;
+            ViewBag.current = current.Term;
             ViewBag.yearTerm = term;
             ViewBag.FourthChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
             ViewBag.SecondChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title");
@@ -83,18 +86,32 @@ namespace OptionsWebSite.Controllers
         public ActionResult Create([Bind(Include = "ChoiceId,YearTermId,StudentId,StudentFirstName,StudentLastName,FirstChoiceOptionId,SecondChoiceOptionId,ThirdChoiceOptionId,FourthChoiceOptionId,SelectionDate")] Choice choice)
         {
 
+            //set current date
             choice.SelectionDate = DateTime.Now;
+
+            //getting current default term
+            var current = db.YearTerms.Where(c => c.isDefault == true).First();
+
+            //check option uniqueness
             Boolean canChoose = choosable(choice);
 
-            if (ModelState.IsValid && canChoose)
+            //check if student already has an entry for the current term
+            var check = checkDuplicate(choice.YearTermId);
+            if (check.Count() > 0)
+            {
+                ModelState.AddModelError("", "You've already made a selection this term.");
+            }
+            //check if the options are all different
+            else if (!canChoose)
+            {
+                ModelState.AddModelError("", "The options you chose must all be different");
+            }
+
+            if (ModelState.IsValid)
             {
                 db.Choices.Add(choice);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ModelState.AddModelError("", "The options you chose must all be different");
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.FirstChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.FirstChoiceOptionId);
@@ -132,17 +149,31 @@ namespace OptionsWebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ChoiceId,YearTermId,StudentId,StudentFirstName,StudentLastName,FirstChoiceOptionId,SecondChoiceOptionId,ThirdChoiceOptionId,FourthChoiceOptionId,SelectionDate")] Choice choice)
         {
+            //set current date
+            choice.SelectionDate = DateTime.Now;
+
+            //check option uniqueness
             Boolean canChoose = choosable(choice);
-            if (ModelState.IsValid && canChoose)
+
+            //check if student already has an entry for the current term
+            var check = checkDuplicate(choice.YearTermId);
+            if (check.Count() > 1)
+            {
+                ModelState.AddModelError("", "You've already made a selection this term.");
+            }
+            //check if the options are all different
+            else if (!canChoose)
+            {
+                ModelState.AddModelError("", "The options you chose must all be different");
+            }
+
+            if (ModelState.IsValid)
             {
                 db.Entry(choice).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            else
-            {
-                ModelState.AddModelError("", "You cannot choose two of the same option.");
-            }
+
             ViewBag.FirstChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.FirstChoiceOptionId);
             ViewBag.YearTermId = new SelectList(db.YearTerms, "YearTermId", "YearTermId", choice.YearTermId);
             ViewBag.FourthChoiceOptionId = new SelectList(getActiveOptions(), "OptionId", "Title", choice.FourthChoiceOptionId);
@@ -158,7 +189,8 @@ namespace OptionsWebSite.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Choice choice = db.Choices.Find(id);
+            var choices = db.Choices.Include(c => c.FirstOption).Include(c => c.SecondOption).Include(c => c.ThirdOption).Include(c => c.FourthOption).Include(c => c.FK_YearTermId);
+            Choice choice = choices.Where(c => c.ChoiceId == id).First();
             if (choice == null)
             {
                 return HttpNotFound();
@@ -186,9 +218,16 @@ namespace OptionsWebSite.Controllers
             base.Dispose(disposing);
         }
 
+        //query db for active options for the drop down list
         private IQueryable<Option> getActiveOptions()
         {
             return db.Options.Where(ao => ao.isActive == true);
+        }
+
+        //check choice table for existing entries for the student in the current term
+        private IQueryable<Choice> checkDuplicate(int yeartermid)
+        {
+            return db.Choices.Where(c => c.StudentId == User.Identity.Name && c.YearTermId == yeartermid);
         }
 
         private bool choosable(Choice choice)

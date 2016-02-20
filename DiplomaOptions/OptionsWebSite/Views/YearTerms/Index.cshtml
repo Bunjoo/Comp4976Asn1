@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Year Term</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -28,8 +28,19 @@
         <td>
             @Html.DisplayFor(modelItem => item.Year)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Term)
+        <td>    
+            @if(item.Term == 10)
+            {
+                @("Winter")
+            }
+            else if(item.Term == 20)
+            {
+                @("Spring/Summer")
+            }
+            else
+            {
+                @("Fall")
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.isDefault)
