@@ -73,6 +73,7 @@ namespace OptionsWebSite.Migrations.IdentityMigrations
                     UserName = "A00222222",
                     Email = "s@s.s"
                 };
+                //student.LockoutEnabled = true;
                 user_manager.Create(student, "P@$$w0rd");
                 user_manager.AddToRole(student.Id, "Student");
             }
