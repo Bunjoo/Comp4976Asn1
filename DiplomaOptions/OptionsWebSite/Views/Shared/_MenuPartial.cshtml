@@ -10,6 +10,7 @@
 @if (User.IsInRole("Admin"))
 {
     <ul class="nav navbar-nav navbar-left">
+        <li>@Html.ActionLink("Users", "Index", "Users")</li>
         <li>@Html.ActionLink("Choices", "Index", "Choices")</li>
         <li>@Html.ActionLink("Options", "Index", "Options")</li>
         <li>@Html.ActionLink("Year Terms", "Index", "YearTerms")</li>

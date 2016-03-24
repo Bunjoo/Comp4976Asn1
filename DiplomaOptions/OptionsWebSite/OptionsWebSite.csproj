@@ -194,6 +194,10 @@
     <Compile Include="Migrations\DiplomaOptionsMigrations\201602172353424_InitialCreate.Designer.cs">
       <DependentUpon>201602172353424_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\DiplomaOptionsMigrations\201603240302359_Seed Choices.cs" />
+    <Compile Include="Migrations\DiplomaOptionsMigrations\201603240302359_Seed Choices.Designer.cs">
+      <DependentUpon>201603240302359_Seed Choices.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DiplomaOptionsMigrations\Configuration.cs" />
     <Compile Include="Migrations\IdentityMigrations\201602180037056_UserCreate.cs" />
     <Compile Include="Migrations\IdentityMigrations\201602180037056_UserCreate.Designer.cs">
@@ -206,6 +210,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\DiplomaOptions.mdf" />
+    <Content Include="App_Data\DiplomaOptions_log.ldf">
+      <DependentUpon>DiplomaOptions.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -275,9 +283,7 @@
     <Content Include="Views\Options\Index.cshtml" />
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -295,6 +301,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\DiplomaOptionsMigrations\201602172353424_InitialCreate.resx">
       <DependentUpon>201602172353424_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\DiplomaOptionsMigrations\201603240302359_Seed Choices.resx">
+      <DependentUpon>201603240302359_Seed Choices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\IdentityMigrations\201602180037056_UserCreate.resx">
       <DependentUpon>201602180037056_UserCreate.cs</DependentUpon>
@@ -314,7 +323,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51286</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

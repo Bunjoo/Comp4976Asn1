@@ -37,6 +37,11 @@ namespace OptionsWebSite.Migrations.DiplomaOptionsMigrations
             context.Options.AddOrUpdate(
                 o => o.OptionId, getOptions().ToArray());
             context.SaveChanges();
+
+            //seed choices
+            context.Choices.AddOrUpdate(
+                c => c.ChoiceId, getChoices().ToArray());
+            context.SaveChanges();
         }
 
         private List<YearTerm> getYearTerm()
@@ -114,6 +119,39 @@ namespace OptionsWebSite.Migrations.DiplomaOptionsMigrations
             };
 
             return options;
+        }
+
+        private List<Choice> getChoices()
+        {
+            List<Choice> choices = new List<Choice>()
+            {
+                new Choice()
+                {
+                    YearTermId = 1,
+                    StudentId = "A00111111",
+                    StudentFirstName = "John",
+                    StudentLastName = "Doe",
+                    FirstChoiceOptionId = 1,
+                    SecondChoiceOptionId = 2,
+                    ThirdChoiceOptionId = 3,
+                    FourthChoiceOptionId = 4,
+                    SelectionDate = DateTime.Now 
+                },
+                new Choice()
+                {
+                    YearTermId = 2,
+                    StudentId = "A00111111",
+                    StudentFirstName = "John",
+                    StudentLastName = "Doe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
+                }
+            };
+
+            return choices;
         }
     }
 }
