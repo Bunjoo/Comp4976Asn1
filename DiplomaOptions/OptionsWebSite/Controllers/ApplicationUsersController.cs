@@ -57,6 +57,38 @@ namespace OptionsWebSite.Controllers
             return View(applicationUser);
         }
 
+        // GET: ApplicationUsers/Delete/5
+        public ActionResult Delete(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var users = db.Users;
+            ApplicationUser user = users.Where(c => c.Id == id).First();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            else if (user.UserName == "A00111111")
+            {
+                return RedirectToAction("Index");
+            }
+            return View(user);
+        }
+
+        // POST: ApplicationUsers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            ApplicationUser user = db.Users.Find(id);
+            db.Users.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

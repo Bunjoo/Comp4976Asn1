@@ -17,13 +17,67 @@ namespace OptionsWebSite.Controllers
     public class ChoicesController : Controller
     {
         private DiplomaOptionsContext db = new DiplomaOptionsContext();
+
+        Dictionary<int, string> Terms = new Dictionary<int, string>()
+        {
+            { 10, "Winter" },
+            { 20, "Spring/Summer" },
+            { 30, "Fall" }
+        };
+
         [OverrideAuthorization()]
         [Authorize(Roles = "Admin")]
         // GET: Choices
         public ActionResult Index()
         {
-            var choices = db.Choices.Include(c => c.FirstOption).Include(c => c.FK_YearTermId).Include(c => c.FourthOption).Include(c => c.SecondOption).Include(c => c.ThirdOption);
-            return View(choices.ToList());
+            //dropdown menu with year terms
+            //var yearList = db.YearTerms.OrderBy(r => r.YearTermId).ToList().Select(rr =>
+            //            new SelectListItem {Value = rr.Year.ToString(), Text = rr.Year.ToString()}).ToList();
+
+            // ViewBag.Years = yearList;
+            string yearterm;
+
+            var choices = db.Choices.Include(c => c.FirstOption).Include(c => c.FourthOption).Include(c => c.SecondOption).Include(c => c.ThirdOption).Include(c => c.YearTermId);
+
+            var yearterms = db.YearTerms.ToArray();
+
+            var defaultyearterm = db.YearTerms.Where(y => y.isDefault == true).First();
+
+            List<SelectListItem> SelectedYearTerms = new List<SelectListItem>();
+
+            foreach (YearTerm term in yearterms)
+            {
+                if (term.Term == 10)
+                    yearterm = "Winter";
+                else if (term.Term == 20)
+                    yearterm = "Spring/Summer";
+                else
+                    yearterm = "Fall";
+
+                if (!term.isDefault)
+                {
+                    SelectedYearTerms.Add(new SelectListItem { Text = yearterm + " " + term.Year.ToString(), Value = term.YearTermId.ToString(), Selected = false });
+                }
+                else
+                {
+                    SelectedYearTerms.Add(new SelectListItem { Text = yearterm + " " + term.Year.ToString(), Value = term.YearTermId.ToString(), Selected = true });
+                }
+
+            }
+
+            ViewBag.YearTermSelects = SelectedYearTerms;
+
+            //// TypeReports
+            //List<SelectListItem> typereports = new List<SelectListItem>()
+            //{
+            //    new SelectListItem {Text = "Details Report", Value = "details" },
+            //    new SelectListItem {Text = "Chart", Value = "chart" }
+            //};
+            //ViewBag.TypeReportSelects = typereports;
+
+            var choicese = db.Choices.Include(c => c.FirstOption).Include(c => c.FK_YearTermId).Include(c => c.FourthOption).Include(c => c.SecondOption).Include(c => c.ThirdOption);
+
+            return View(choicese.ToList());
         }
 
         // GET: Choices/Details/5

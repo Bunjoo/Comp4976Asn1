@@ -127,22 +127,239 @@ namespace OptionsWebSite.Migrations.DiplomaOptionsMigrations
             {
                 new Choice()
                 {
-                    YearTermId = 1,
-                    StudentId = "A00111111",
-                    StudentFirstName = "John",
+                    YearTermId = 2,
+                    StudentId = "A00111100",
+                    StudentFirstName = "Gub",
                     StudentLastName = "Doe",
                     FirstChoiceOptionId = 1,
                     SecondChoiceOptionId = 2,
                     ThirdChoiceOptionId = 3,
                     FourthChoiceOptionId = 4,
-                    SelectionDate = DateTime.Now 
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 3,
+                    StudentId = "A00111144",
+                    StudentFirstName = "Bob",
+                    StudentLastName = "Doe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
                 },
                 new Choice()
                 {
                     YearTermId = 2,
-                    StudentId = "A00111111",
-                    StudentFirstName = "John",
-                    StudentLastName = "Doe",
+                    StudentId = "A00111112",
+                    StudentFirstName = "Aohn",
+                    StudentLastName = "Doer",
+                    FirstChoiceOptionId = 1,
+                    SecondChoiceOptionId = 2,
+                    ThirdChoiceOptionId = 3,
+                    FourthChoiceOptionId = 4,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 2,
+                    StudentId = "A00111113",
+                    StudentFirstName = "Pohn",
+                    StudentLastName = "Roe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 2,
+                    StudentId = "A00111114",
+                    StudentFirstName = "Oohn",
+                    StudentLastName = "Snoe",
+                    FirstChoiceOptionId = 1,
+                    SecondChoiceOptionId = 2,
+                    ThirdChoiceOptionId = 3,
+                    FourthChoiceOptionId = 4,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 2,
+                    StudentId = "A00111115",
+                    StudentFirstName = "Wohn",
+                    StudentLastName = "Joe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 2,
+                    StudentId = "A00111116",
+                    StudentFirstName = "Vohn",
+                    StudentLastName = "Boe",
+                    FirstChoiceOptionId = 1,
+                    SecondChoiceOptionId = 2,
+                    ThirdChoiceOptionId = 3,
+                    FourthChoiceOptionId = 4,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 2,
+                    StudentId = "A00111117",
+                    StudentFirstName = "Rohn",
+                    StudentLastName = "Foe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 2,
+                    StudentId = "A00111118",
+                    StudentFirstName = "Lohn",
+                    StudentLastName = "Soe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 2,
+                    StudentId = "A00111119",
+                    StudentFirstName = "Hohn",
+                    StudentLastName = "Goe",
+                    FirstChoiceOptionId = 1,
+                    SecondChoiceOptionId = 2,
+                    ThirdChoiceOptionId = 3,
+                    FourthChoiceOptionId = 4,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 2,
+                    StudentId = "A00200000",
+                    StudentFirstName = "Sohn",
+                    StudentLastName = "Eoe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
+                },
+                //10 for 201530
+                new Choice()
+                {
+                    YearTermId = 3,
+                    StudentId = "A00111112",
+                    StudentFirstName = "Aohn",
+                    StudentLastName = "Doer",
+                    FirstChoiceOptionId = 1,
+                    SecondChoiceOptionId = 2,
+                    ThirdChoiceOptionId = 3,
+                    FourthChoiceOptionId = 4,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 3,
+                    StudentId = "A00111113",
+                    StudentFirstName = "Pohn",
+                    StudentLastName = "Roe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 3,
+                    StudentId = "A00111114",
+                    StudentFirstName = "Oohn",
+                    StudentLastName = "Snoe",
+                    FirstChoiceOptionId = 1,
+                    SecondChoiceOptionId = 2,
+                    ThirdChoiceOptionId = 3,
+                    FourthChoiceOptionId = 4,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 3,
+                    StudentId = "A00111115",
+                    StudentFirstName = "Wohn",
+                    StudentLastName = "Joe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 3,
+                    StudentId = "A00111116",
+                    StudentFirstName = "Vohn",
+                    StudentLastName = "Boe",
+                    FirstChoiceOptionId = 1,
+                    SecondChoiceOptionId = 2,
+                    ThirdChoiceOptionId = 3,
+                    FourthChoiceOptionId = 4,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 3,
+                    StudentId = "A00111117",
+                    StudentFirstName = "Rohn",
+                    StudentLastName = "Foe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 3,
+                    StudentId = "A00111118",
+                    StudentFirstName = "Lohn",
+                    StudentLastName = "Soe",
+                    FirstChoiceOptionId = 2,
+                    SecondChoiceOptionId = 1,
+                    ThirdChoiceOptionId = 4,
+                    FourthChoiceOptionId = 3,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 3,
+                    StudentId = "A00111119",
+                    StudentFirstName = "Hohn",
+                    StudentLastName = "Goe",
+                    FirstChoiceOptionId = 1,
+                    SecondChoiceOptionId = 2,
+                    ThirdChoiceOptionId = 3,
+                    FourthChoiceOptionId = 4,
+                    SelectionDate = DateTime.Now
+                },
+                new Choice()
+                {
+                    YearTermId = 3,
+                    StudentId = "A00200000",
+                    StudentFirstName = "Sohn",
+                    StudentLastName = "Eoe",
                     FirstChoiceOptionId = 2,
                     SecondChoiceOptionId = 1,
                     ThirdChoiceOptionId = 4,

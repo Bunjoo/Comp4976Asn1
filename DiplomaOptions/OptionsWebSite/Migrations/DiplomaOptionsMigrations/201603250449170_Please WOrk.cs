@@ -3,7 +3,7 @@ namespace OptionsWebSite.Migrations.DiplomaOptionsMigrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class PleaseWOrk : DbMigration
     {
         public override void Up()
         {
