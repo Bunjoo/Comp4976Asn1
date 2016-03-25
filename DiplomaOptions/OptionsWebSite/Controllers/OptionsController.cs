@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DiplomaDataModel;
-using OptionsWebSite.DataContext;
+using DiplomaDataModel.DataContext;
 
 namespace OptionsWebSite.Controllers
 {

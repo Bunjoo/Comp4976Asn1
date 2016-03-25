@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiplomaDataModel", "Diploma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionsWebSite", "OptionsWebSite\OptionsWebSite.csproj", "{B108C21A-4FBC-4E00-BFD5-D94135C26C60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionsWebAPI", "OptionsWebAPI\OptionsWebAPI.csproj", "{BA4368A8-97CB-4A0E-9EB6-642454B8DE98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionsClient", "OptionsClient\OptionsClient.csproj", "{C7179C3C-A9CA-4277-95C1-C38160F5C1EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{B108C21A-4FBC-4E00-BFD5-D94135C26C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B108C21A-4FBC-4E00-BFD5-D94135C26C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B108C21A-4FBC-4E00-BFD5-D94135C26C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA4368A8-97CB-4A0E-9EB6-642454B8DE98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA4368A8-97CB-4A0E-9EB6-642454B8DE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA4368A8-97CB-4A0E-9EB6-642454B8DE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA4368A8-97CB-4A0E-9EB6-642454B8DE98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7179C3C-A9CA-4277-95C1-C38160F5C1EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7179C3C-A9CA-4277-95C1-C38160F5C1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7179C3C-A9CA-4277-95C1-C38160F5C1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7179C3C-A9CA-4277-95C1-C38160F5C1EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

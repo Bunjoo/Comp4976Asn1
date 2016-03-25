@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using DiplomaDataModel;
 
-namespace OptionsWebSite.DataContext
+namespace DiplomaDataModel.DataContext
 {
     public class DiplomaOptionsContext : DbContext
     {

@@ -188,7 +188,6 @@
     <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\YearTermsController.cs" />
-    <Compile Include="DataContext\DiplomaOptionsContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
