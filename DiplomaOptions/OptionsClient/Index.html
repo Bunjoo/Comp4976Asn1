@@ -5,6 +5,23 @@
 	<meta charset="utf-8" />
 </head>
 <body>
+    <h3>Cors Request</h3>
+    <button id="btnGetPatients">Get Choices</button>
+    <pre id="preOutput"></pre>
+        <script src="Scripts/jquery-2.2.1.js"></script>
+        <script>
+    $(function () {
+    var getPatients = function () {
+        var url = "http://a2api.amandaxu.xyz/api/choices";
+    $.get(url).always(showResponse);
+    return false;
+    };
+    var showResponse = function (object) {
+    $("#preOutput").text(JSON.stringify(object, null, 4));
+    };
+    $("#btnGetPatients").click(getPatients);
+    });
+    </script>
 
 </body>
 </html>
