@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Choice.cs" />
+    <Compile Include="DataContext\DiplomaOptionsContext.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
