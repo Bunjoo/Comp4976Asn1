@@ -7,13 +7,13 @@ namespace OptionsWebSite.Migrations.DiplomaOptionsMigrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class PleaseWOrk : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PleaseWOrk));
         
         string IMigrationMetadata.Id
         {
-            get { return "201602172353424_InitialCreate"; }
+            get { return "201603250449170_Please WOrk"; }
         }
         
         string IMigrationMetadata.Source

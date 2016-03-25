@@ -4,6 +4,55 @@
     ViewBag.Title = "Index";
 }
 
+<head>
+    @*<script src="./Scripts/jquery-2.2.1.min.js"></script>*@
+
+    <br/>
+    @Html.Label("Year and Term: ")
+    @Html.DropDownList("YearTermSelects", null, new { @class = "form-control" })
+
+    <script>
+
+        var baseUrl = 'http://a2api.amandaxu.xyz/api/choices';
+
+        function GetAllChoices(target) {
+            jQuery.support.cors = true;
+            $.ajax({
+                url: baseUrl,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    WriteResponse(data, target);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+           }
+
+            function WriteResponse(people, target) {
+            var strResult = "<table class='ui-state-highlight'><tr><th>Id</th><th>First Name</th><th>Last Name</th><th>YearTermId</th><th>First Choice</th></tr>";
+            $.each(people, function (index, person) {
+                if(person.YearTermId == ($('#YearTermSelects').val())){
+                strResult += "<tr>\n";
+                strResult += "<td>" + ((person.StudentId !== undefined) ? person.StudentId : "") + "</td><td> " + person.StudentFirstName + "</td><td>" + person.StudentLastName + "</td><td>" + person.YearTermId + "</td><td>" + person.FirstChoiceOptionId + "</td>";
+                strResult += "<td></td>\n"
+                strResult += "</tr>\n";
+                }
+            });
+            strResult += "</table>\n";
+            $(target).html(strResult);
+        }
+    </script>
+</head>
+
+<br/>
+<div id="show_all">
+    <button onclick="GetAllChoices('#div_show_all'); return false;">Get Choices</button>
+    <br /><br />
+    <div id="div_show_all"></div>
+</div>
+
 <h2>Index</h2>
 
 <p>

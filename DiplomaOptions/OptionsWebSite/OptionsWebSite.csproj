@@ -193,17 +193,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\DiplomaOptionsMigrations\201602172353424_InitialCreate.cs" />
-    <Compile Include="Migrations\DiplomaOptionsMigrations\201602172353424_InitialCreate.Designer.cs">
-      <DependentUpon>201602172353424_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\DiplomaOptionsMigrations\201603240302359_Seed Choices.cs" />
-    <Compile Include="Migrations\DiplomaOptionsMigrations\201603240302359_Seed Choices.Designer.cs">
-      <DependentUpon>201603240302359_Seed Choices.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\DiplomaOptionsMigrations\201603250233269_Second Choice Seed.cs" />
-    <Compile Include="Migrations\DiplomaOptionsMigrations\201603250233269_Second Choice Seed.Designer.cs">
-      <DependentUpon>201603250233269_Second Choice Seed.cs</DependentUpon>
+    <Compile Include="Migrations\DiplomaOptionsMigrations\201603250449170_Please WOrk.cs" />
+    <Compile Include="Migrations\DiplomaOptionsMigrations\201603250449170_Please WOrk.Designer.cs">
+      <DependentUpon>201603250449170_Please WOrk.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DiplomaOptionsMigrations\Configuration.cs" />
     <Compile Include="Migrations\IdentityMigrations\201602180037056_UserCreate.cs" />
@@ -230,9 +222,12 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -309,7 +304,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DiplomaDataModel\DiplomaDataModel.csproj">
@@ -318,14 +312,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\DiplomaOptionsMigrations\201602172353424_InitialCreate.resx">
-      <DependentUpon>201602172353424_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\DiplomaOptionsMigrations\201603240302359_Seed Choices.resx">
-      <DependentUpon>201603240302359_Seed Choices.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\DiplomaOptionsMigrations\201603250233269_Second Choice Seed.resx">
-      <DependentUpon>201603250233269_Second Choice Seed.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\DiplomaOptionsMigrations\201603250449170_Please WOrk.resx">
+      <DependentUpon>201603250449170_Please WOrk.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\IdentityMigrations\201602180037056_UserCreate.resx">
       <DependentUpon>201602180037056_UserCreate.cs</DependentUpon>
