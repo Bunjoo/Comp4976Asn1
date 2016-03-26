@@ -1,36 +1,57 @@
-﻿$(document).ready(function () {
-    $("#LoginBtn").click(function () {
-        $('#loginForm').removeClass('hide');
-        $('#regForm').addClass('hide');
-        $('#choiceForm').addClass('hide');
-    });
-    $("#RegBtn").click(function () {
-        $('#regForm').removeClass('hide');
-        $('#loginForm').addClass('hide');
-        $('#choiceForm').addClass('hide');
-    });
-    $("#OptionBtn").click(function () {
-        $('#choiceForm').removeClass('hide');
-        $('#loginForm').addClass('hide');
-        $('#regForm').addClass('hide');
-    });
-});
+﻿
+    var optionPicker = angular.module("optionPicker", []);
 
-(function () {
-    
-    var app = angular.module("myApp", []);
+    optionPicker.controller('mainCtrl', function ($scope, $http, $window, $httpParamSerializerJQLike) {
 
-    $scope.register = function () {
-        console.log("Registering");
-        var regUrl = "http://a2api.amandaxu.xyz/api/Account/Register";
-        /*
-        var username = ($scope.reg.username);
-        var email = ($scope.reg.email);
-        var password = ($scope.reg.password);
-        var confirmPass = ($scope.reg.confirmPass);
-        */
-        //check for password
-    }
+        $scope.login = function () {
 
+            //the header/authentication
+            $scope.user = {
+                grant_type: "password",
+                Username: $("#login_usr").val(),
+                Password: $("#login_pwd").val()
+            };
 
-});
+            console.log( $("#login_usr").val());
+            console.log($("#login_pwd").val());
+
+            $http
+                .post('http://a2api.amandaxu.xyz/Token', $httpParamSerializerJQLike('$scope.user'))
+                .success(function (data, status, headers, config) {
+                    $window.sessionStorage.token = data.token;
+                    console.log(data.token);
+                    $scope.lresponse = "Successfully logged in."
+                })
+                .error(function (data, status, headers, config) {
+                    delete $window.sessionStorage.token;
+                    $scope.lresponse = data;
+                    $scope.lresponse = "hi";
+                    console.log("no work");
+                })
+        }
+        
+        $scope.register = function () {
+            $scope.newuser = {
+                Username: $("#reg_usr").val(),
+                Email: $("#reg_email").val(),
+                Password: $("#reg_pwd").val(),
+                ConfirmPassword: $("#reg_cpwd").val()
+            };
+
+            $http
+                .post('http://a2api.amandaxu.xyz/api/account/register', $scope.newuser)
+                .success(function (data, status, headers, config) {
+                    $scope.rresponse = "You have successfully registered!";
+                })
+                .error(function (data, status, headers, config) {
+                    $scope.rresponse = data;
+                });
+        };
+
+        $scope.register = function () {
+            $scope.newChoice = {
+
+            }
+        }
+
+    })

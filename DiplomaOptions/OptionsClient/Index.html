@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html data-ng-app="optionPicker">
 <head>
     <title></title>
     <meta charset="utf-8" />
@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular-resource.js"></script>
     <script src="Scripts/script.js"></script>
 </head>
-<body data-ng-app="myApp" ng-controller="myController">
+<body data-ng-controller="mainCtrl">
     <!--navbar-->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -28,45 +28,51 @@
         <h1 style="text-align:center">BCIT Picker</h1>
         <!--Login-->
         <div id="loginForm" class="col-sm-4 col-sm-offset-4">
-            <form>
+            <form ng-submit="login()">
                 <h3>Login</h3>
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" class="form-control" />
+                    <input type="text" id="login_usr" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" />
+                    <input type="password" id ="login_pwd" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <input type="submit" ng-click="login()" value="Login" class="btn btn-default" />
+                    <input type="submit" id="login_sbmt" value="Login" class="btn btn-default" />
                 </div>
             </form>
+            <div class="response">
+                {{lresponse}}
+            </div>
         </div>
         <!--Register-->
         <div id="regForm" class="hide col-sm-4 col-sm-offset-4">
-            <form>
+            <form ng-submit="register()">
                 <h3>Register</h3>
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" class="form-control" ng-model="reg.username"/>
+                    <input type="text" id="reg_usr" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="text" class="form-control" ng-model="reg.email"/>
+                    <input type="text" id="reg_email" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" ng-model="reg.password"/>
+                    <input type="password" id="reg_pwd" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label>Confirm Password</label>
-                    <input type="password" class="form-control" ng-model="reg.confirmPass"/>
+                    <input type="password" id="reg_cpwd" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <input type="submit" ng-click="register()" value="Register" class="btn btn-default" />
+                    <input type="submit" id="reg_sbmt" value="Register" class="btn btn-default" />
                 </div>
             </form>
+            <div class="response">
+                {{rresponse}}
+            </div>
         </div>
         <!--Option Picker-->
         <div id="choiceForm" class="hide col-sm-4 col-sm-offset-4">
@@ -125,7 +131,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="submit" ng-click="pickOptions()" value="Submit" class="btn btn-default" />
+                    <input type="submit" value="Submit" class="btn btn-default" />
                 </div>
             </form>
         </div>
@@ -133,3 +139,24 @@
 
 </body>
 </html>
+
+<script>
+
+    $(document).ready(function () {
+        $("#LoginBtn").click(function () {
+            $('#loginForm').removeClass('hide');
+            $('#regForm').addClass('hide');
+            $('#choiceForm').addClass('hide');
+        });
+        $("#RegBtn").click(function () {
+            $('#regForm').removeClass('hide');
+            $('#loginForm').addClass('hide');
+            $('#choiceForm').addClass('hide');
+        });
+        $("#OptionBtn").click(function () {
+            $('#choiceForm').removeClass('hide');
+            $('#loginForm').addClass('hide');
+            $('#regForm').addClass('hide');
+        });
+    });
+</script>
