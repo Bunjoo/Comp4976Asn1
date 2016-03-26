@@ -2,18 +2,54 @@
 
 @{
     ViewBag.Title = "Index";
+    string[] options = ViewBag.OptionsArray;
 }
 
 <head>
-    @*<script src="./Scripts/jquery-2.2.1.min.js"></script>*@
+    <br />
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+    @*<div id="hidden">
+        @for(var i = 1; i < options.Length; i++)
+        {
+            <p class=@i>@options[i]</p>
+        }
+    </div>*@
 
     <br/>
-    @Html.Label("Year and Term: ")
-    @Html.DropDownList("YearTermSelects", null, new { @class = "form-control" })
+    <table>
+        <tr>
+            <td>@Html.Label("Type of Reports: ") @Html.DropDownList("ReportSelect", null, htmlAttributes: new { @class = "form-control" })</td>
+            <td>@Html.Label("Year and Term: ") @Html.DropDownList("YearTermSelects", null, new { @class = "form-control" })</td>
+        </tr>
+    </table>
+    <br/>
+    <button onclick="showReports('#show_report'); return false;">Get Reports</button>
+    <br /><br />
 
     <script>
 
         var baseUrl = 'http://a2api.amandaxu.xyz/api/choices';
+
+        function showReports(target) {
+            //if value is report
+            if ($('#ReportSelect').val() == "details") {
+                //get detailed report
+                GetAllChoices(target);
+            }
+
+            if ($('#ReportSelect').val() == "chart") {
+                //empty div
+                $(target).empty();
+                 
+                //call chart function (Amanda)
+            }
+        }
 
         function GetAllChoices(target) {
             jQuery.support.cors = true;
@@ -30,14 +66,19 @@
             });
            }
 
-            function WriteResponse(people, target) {
-            var strResult = "<table class='ui-state-highlight'><tr><th>Id</th><th>First Name</th><th>Last Name</th><th>YearTermId</th><th>First Choice</th></tr>";
+        function WriteResponse(people, target) {
+            var strResult = "<table class='table'><tr><th>Id</th><th>First Name</th><th>Last Name</th><th>Year Term</th><th>First Choice</th><th>Second Choice</th><<th>Third Choice</th>/<th>Fourth Choice</th>tr>";
+
+            var currentyearterm = $('#YearTermSelects').find(":selected").text();
+
             $.each(people, function (index, person) {
-                if(person.YearTermId == ($('#YearTermSelects').val())){
-                strResult += "<tr>\n";
-                strResult += "<td>" + ((person.StudentId !== undefined) ? person.StudentId : "") + "</td><td> " + person.StudentFirstName + "</td><td>" + person.StudentLastName + "</td><td>" + person.YearTermId + "</td><td>" + person.FirstChoiceOptionId + "</td>";
-                strResult += "<td></td>\n"
-                strResult += "</tr>\n";
+                if (person.YearTermId == ($('#YearTermSelects').val())) {
+
+                    var firstOption = person.FirstChoiceOptionId;
+                    strResult += "<tr>\n";
+                    strResult += "<td>" + ((person.StudentId !== undefined) ? person.StudentId : "") + "</td><td> " + person.StudentFirstName + "</td><td>" + person.StudentLastName + "</td><td>" + currentyearterm + "</td><td>" +  person.FirstChoiceOptionId + "</td>" + "</td><td>" + person.SecondChoiceOptionId + "</td>" + "</td><td>" + person.ThirdChoiceOptionId + "</td>" + "</td><td>" + person.FourthChoiceOptionId + "</td>";
+                    strResult += "<td></td>\n"
+                    strResult += "</tr>\n";
                 }
             });
             strResult += "</table>\n";
@@ -46,19 +87,11 @@
     </script>
 </head>
 
-<br/>
-<div id="show_all">
-    <button onclick="GetAllChoices('#div_show_all'); return false;">Get Choices</button>
-    <br /><br />
-    <div id="div_show_all"></div>
+<div id="show_report">
+
 </div>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.StudentId)
@@ -132,4 +165,4 @@
     </tr>
 }
 
-</table>
+</table>*@
