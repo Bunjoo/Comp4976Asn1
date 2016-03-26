@@ -49,9 +49,8 @@
         };
 
         $scope.register = function () {
-            $scope.newChoice = {
+            
 
-            }
         }
 
     })
