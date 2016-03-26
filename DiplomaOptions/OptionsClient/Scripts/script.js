@@ -48,7 +48,7 @@
                 });
         };
 
-        $scope.register = function () {
+        $scope.pickOptions = function () {
             
 
         }
