@@ -29,8 +29,6 @@ namespace OptionsWebSite.Controllers
 
             var yearterms = db.YearTerms.ToArray();
 
-            var options = db.Options.ToArray();
-
             var defaultyearterm = db.YearTerms.Where(y => y.isDefault == true).First();
 
             List<SelectListItem> SelectedYearTerms = new List<SelectListItem>();
@@ -54,15 +52,6 @@ namespace OptionsWebSite.Controllers
                 }
 
             }
-
-            string[] optionsArray = new string[100];
-
-            foreach (Option option in options)
-            {
-                optionsArray[option.OptionId] = option.Title;   
-            }
-
-            ViewBag.OptionsArray = optionsArray;
 
             ViewBag.YearTermSelects = SelectedYearTerms;
 
