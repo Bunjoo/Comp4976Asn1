@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Index";
-    string[] options = ViewBag.OptionsArray;
 }
 
 <head>
@@ -13,13 +12,6 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-
-    @*<div id="hidden">
-        @for(var i = 1; i < options.Length; i++)
-        {
-            <p class=@i>@options[i]</p>
-        }
-    </div>*@
 
     <br/>
     <table>
@@ -32,6 +24,9 @@
     <button onclick="showReports('#show_report'); return false;">Get Reports</button>
     <br /><br />
 
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
 
         var baseUrl = 'http://a2api.amandaxu.xyz/api/choices';
@@ -47,7 +42,28 @@
                 //empty div
                 $(target).empty();
                  
-                //call chart function (Amanda)
+                //call chart function
+                google.charts.load('current', { 'packages': ['corechart'] });
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+
+                    var data = google.visualization.arrayToDataTable([
+                      ['Task', 'Hours per Day'],
+                      ['Data Communications', 11],
+                      ['Client Server', 2],
+                      ['Digital Processing', 2],
+                      ['Information Systems', 2],
+                      ['Tech Pro', 7]
+                    ]);
+
+                    var options = {
+                        title: 'Fall 2016'
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                    chart.draw(data, options);
+                }
             }
         }
 
@@ -91,7 +107,7 @@
 
 </div>
 
-@*<table class="table">
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.StudentId)
@@ -165,4 +181,4 @@
     </tr>
 }
 
-</table>*@
+</table>
