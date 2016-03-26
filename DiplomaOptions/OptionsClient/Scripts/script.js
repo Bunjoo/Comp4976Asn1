@@ -15,3 +15,22 @@
         $('#regForm').addClass('hide');
     });
 });
+
+(function () {
+    
+    var app = angular.module("myApp", []);
+
+    $scope.register = function () {
+        console.log("Registering");
+        var regUrl = "http://a2api.amandaxu.xyz/api/Account/Register";
+        /*
+        var username = ($scope.reg.username);
+        var email = ($scope.reg.email);
+        var password = ($scope.reg.password);
+        var confirmPass = ($scope.reg.confirmPass);
+        */
+        //check for password
+    }
+
+
+});
