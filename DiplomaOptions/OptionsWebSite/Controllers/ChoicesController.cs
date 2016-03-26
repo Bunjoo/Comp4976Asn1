@@ -18,28 +18,18 @@ namespace OptionsWebSite.Controllers
     {
         private DiplomaOptionsContext db = new DiplomaOptionsContext();
 
-        Dictionary<int, string> Terms = new Dictionary<int, string>()
-        {
-            { 10, "Winter" },
-            { 20, "Spring/Summer" },
-            { 30, "Fall" }
-        };
-
         [OverrideAuthorization()]
         [Authorize(Roles = "Admin")]
         // GET: Choices
         public ActionResult Index()
         {
-            //dropdown menu with year terms
-            //var yearList = db.YearTerms.OrderBy(r => r.YearTermId).ToList().Select(rr =>
-            //            new SelectListItem {Value = rr.Year.ToString(), Text = rr.Year.ToString()}).ToList();
-
-            // ViewBag.Years = yearList;
             string yearterm;
 
             var choices = db.Choices.Include(c => c.FirstOption).Include(c => c.FourthOption).Include(c => c.SecondOption).Include(c => c.ThirdOption).Include(c => c.YearTermId);
 
             var yearterms = db.YearTerms.ToArray();
+
+            var options = db.Options.ToArray();
 
             var defaultyearterm = db.YearTerms.Where(y => y.isDefault == true).First();
 
@@ -65,15 +55,24 @@ namespace OptionsWebSite.Controllers
 
             }
 
+            string[] optionsArray = new string[100];
+
+            foreach (Option option in options)
+            {
+                optionsArray[option.OptionId] = option.Title;   
+            }
+
+            ViewBag.OptionsArray = optionsArray;
+
             ViewBag.YearTermSelects = SelectedYearTerms;
 
-            //// TypeReports
-            //List<SelectListItem> typereports = new List<SelectListItem>()
-            //{
-            //    new SelectListItem {Text = "Details Report", Value = "details" },
-            //    new SelectListItem {Text = "Chart", Value = "chart" }
-            //};
-            //ViewBag.TypeReportSelects = typereports;
+            List<SelectListItem> ReportList = new List<SelectListItem>()
+            {
+                new SelectListItem {Text = "Details Report", Value = "details" },
+                new SelectListItem {Text = "Chart", Value = "chart" }
+            };
+
+            ViewBag.ReportSelect = ReportList;
 
             var choicese = db.Choices.Include(c => c.FirstOption).Include(c => c.FK_YearTermId).Include(c => c.FourthOption).Include(c => c.SecondOption).Include(c => c.ThirdOption);
 
